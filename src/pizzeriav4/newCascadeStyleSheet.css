@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25-mar-2018, 23:17:47
+    Author     : Kokekui
+*/
+.AnchorPane{
+    -fx-background-color: #d14917;
+}
+.label{
+    -fx-text-fill: #f88C00;
+}
+.RadioButton{
+    -fx-text-fill: #f88C00;
+}
+.Button{
+    -fx-background-color: #f9fe7e;
+    -fx-text-fill: #d9ae4e
+}
+.ListView{
+    -fx-background-color: #f9fe7e;
+}
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
+}
