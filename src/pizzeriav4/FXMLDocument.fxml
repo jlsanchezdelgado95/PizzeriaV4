@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzeriav4.PizzaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzeriav4.PizzaController">
    <children>
       <Label layoutX="43.0" layoutY="44.0" text="Masa">
          <font>
@@ -45,7 +45,7 @@
          </font>
       </Label>
       <ComboBox fx:id="cbTipoPizza" layoutX="132.0" layoutY="80.0" onAction="#tipoPizza" prefWidth="150.0" />
-      <TextArea fx:id="taComposicion" layoutX="132.0" layoutY="250.0" prefHeight="200.0" prefWidth="402.0" />
+      <TextArea fx:id="taComposicion" editable="false" layoutX="132.0" layoutY="250.0" prefHeight="200.0" prefWidth="402.0" />
       <CheckBox fx:id="cBox1" layoutX="300.0" layoutY="81.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" text="Jamon" />
       <CheckBox fx:id="cBox2" layoutX="300.0" layoutY="108.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" text="Queso" />
       <CheckBox fx:id="cBox3" layoutX="300.0" layoutY="138.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" text="Tomate" />

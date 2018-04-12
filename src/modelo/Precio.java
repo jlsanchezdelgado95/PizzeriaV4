@@ -19,17 +19,25 @@ public class Precio {
     private Map<String, Double> precioIngrediente = new HashMap<>();
 
     public Precio() {
-        cargarHashMaps();
+        cargaMasa();
+        cargaIngredientes();
+        cargaTipoPizzas();
     }
 
-    private void cargarHashMaps() {
-        precioIngrediente.put("Jamon", 0.5);
-        precioIngrediente.put("Queso", 0.75);
+    private void cargaMasa() {
+        precioMasa.put("Normal", 9.00);
+        precioMasa.put("Integral", 9.50);
+    }
+
+    private void cargaIngredientes() {
+        precioIngrediente.put("Queso", 0.5);
+        precioIngrediente.put("Jamon", 0.75);
         precioIngrediente.put("Tomate", 1.5);
         precioIngrediente.put("Cebolla", 2.5);
         precioIngrediente.put("Oliva", 1.0);
-        precioMasa.put("Normal", 9.00);
-        precioMasa.put("Integral", 9.50);
+    }
+
+    private void cargaTipoPizzas() {
         precioTiposPizzas.put("Basica", 3.00);
         precioTiposPizzas.put("Mexicana", 7.00);
         precioTiposPizzas.put("Barbacoa", 8.50);

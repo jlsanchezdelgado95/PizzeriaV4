@@ -12,12 +12,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.stream.Stream;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 /**
@@ -107,14 +110,13 @@ public class Pizza {
             direccion = ticketGener.getAbsolutePath();
         }
         boolean ok = false;
-        DateTimeFormatter formateado = DateTimeFormatter.ofPattern("yyyy/mm/dd hh-mm-ss");
+        DateTimeFormatter formateado = DateTimeFormatter.ofPattern("yyyy_mm_dd hh-mm-ss");
         String fechaFormat = LocalDateTime.now().format(formateado);
-        Path ticketSel = Paths.get(direccion + "\\Ticket" + fechaFormat + ".txt");
-        try (BufferedWriter out = Files.newBufferedWriter(ticketSel, StandardOpenOption.CREATE_NEW)) {
+        Path ticketSel = Paths.get(direccion + "\\Tickets" + fechaFormat + ".txt");
+        try (BufferedWriter out = Files.newBufferedWriter(ticketSel, StandardOpenOption.CREATE)) {
             out.write(composicion());
             out.newLine();
             out.write(String.valueOf(calcularPrecio()));
-            out.newLine();
             ok = true;
         } catch (IOException e) {
             System.out.println("Error al abrir el fichero");
@@ -122,6 +124,35 @@ public class Pizza {
         return ok;
     }
 
+    public static void cargarPrecios() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        Map<String, Double> listarPrecios = new HashMap<>();
+        Window ventana = null;
+        String direccion = "";
+        File ticketGener = directoryChooser.showDialog(ventana);
+        if (ticketGener != null) {
+            direccion = ticketGener.getAbsolutePath();
+        }
+        Path archivo = Paths.get(direccion);
+        try (Stream<String> datos = Files.lines(archivo);) {
+            Iterator<String> it = datos.iterator();
+            while (it.hasNext()) {
+                StringTokenizer s = new StringTokenizer(it.next(), ":");
+                while (s.hasMoreTokens() == true) { //si hay mas trozos
+                    String nombre = s.nextToken();
+                    Double precio = Double.parseDouble(s.nextToken());
+                    listarPrecios.put(nombre, precio);
+//                    precioPizza.setPrecioMasa(nombre,precio); HACERLO CUANDO TENGA TODOS LOS PRECIOS METIDOS
+// Meterle el hashmap, uno a uno, con las diferentes cargas, diferenciandolo con los 3 guiones
+                    System.out.println(s.nextToken()); //siguiente trozo
+                }
+            }
+        } catch (IOException ex) {
+            System.out.println("Error en la lectura del archivo");
+        }
+    }
+
+    //GETS Y SETS
     public String getTipo() {
         return tipo;
     }
