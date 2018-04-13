@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzeriav4.PizzaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzeriav4.PizzaController">
    <children>
       <Label layoutX="43.0" layoutY="44.0" text="Masa">
          <font>
@@ -52,5 +52,6 @@
       <CheckBox fx:id="cBox4" layoutX="300.0" layoutY="168.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" text="Cebolla" />
       <CheckBox fx:id="cBox5" layoutX="300.0" layoutY="198.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Oliva" />
       <Button fx:id="bTicket" layoutX="441.0" layoutY="186.0" mnemonicParsing="false" onAction="#generarTicket" text="Generar Ticket" />
+      <Button fx:id="bCargarPrecios" layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#cargarPrecios" text="Cargar Precios" />
    </children>
 </AnchorPane>

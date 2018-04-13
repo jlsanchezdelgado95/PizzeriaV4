@@ -58,6 +58,8 @@ public class PizzaController implements Initializable {
     private CheckBox cBox5;
     @FXML
     private Button bTicket;
+    @FXML
+    private Button bCargarPrecios;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,6 +158,11 @@ public class PizzaController implements Initializable {
         }
         
         
+    }
+
+    @FXML
+    private void cargarPrecios(ActionEvent event) {
+        pizza.cargarPrecios();
     }
 
 }

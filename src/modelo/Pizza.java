@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 /**
@@ -28,23 +29,23 @@ import javafx.stage.Window;
  * @author Kokekui
  */
 public class Pizza {
-
+    
     private String masa;
     private String tipo;
     private String tamanyo;
     private List conjIngredientes;
     private Precio precioPizza = new Precio();
-
+    
     public Pizza() {
     }
-
+    
     public Pizza(String masa, String tipo, String tamanyo, List conjIngredientes) {
         this.masa = masa;
         this.tipo = tipo;
         this.tamanyo = tamanyo;
         this.conjIngredientes = conjIngredientes;
     }
-
+    
     private double calcularPrecio() {
         double precioFinal, precioParcial, precioMasa = 0, precioTipo = 0, precioIngredientes;
         if (masa != null) {
@@ -69,7 +70,7 @@ public class Pizza {
         }
         return precioFinal;
     }
-
+    
     public String composicion() {
         String mensaje = "";
         mensaje += "Precio Final: " + calcularPrecio() + "\n";
@@ -85,10 +86,10 @@ public class Pizza {
         if (tamanyo != null) {
             mensaje += "Tamaño: " + tamanyo + "\n";
         }
-
+        
         return mensaje;
     }
-
+    
     private double calcularIngredientes() {
         double precioIngredientes = 0;
         if (precioPizza.getPrecioIngrediente().keySet() != null && conjIngredientes != null) {
@@ -100,7 +101,7 @@ public class Pizza {
         }
         return precioIngredientes;
     }
-
+    
     public boolean generarTicket() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         Window ventana = null;
@@ -123,13 +124,16 @@ public class Pizza {
         }
         return ok;
     }
-
-    public static void cargarPrecios() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        Map<String, Double> listarPrecios = new HashMap<>();
+    
+    public void cargarPrecios() {
+//        precioPizza.getPrecioIngrediente().clear(); AL HACER = AL SET, SE MACHACA EL MAP QUE ESTABA
+        FileChooser fileChooser = new FileChooser();
+        Map<String, Double> mapMasa = new HashMap<>();// mover los filechooser y los directory en el controller, y despues mandarlo aqui
+        Map<String, Double> mapTipo = new HashMap<>();// mover los filechooser y los directory en el controller, y despues mandarlo aqui
+        Map<String, Double> mapIngrediente = new HashMap<>();// mover los filechooser y los directory en el controller, y despues mandarlo aqui
         Window ventana = null;
         String direccion = "";
-        File ticketGener = directoryChooser.showDialog(ventana);
+        File ticketGener = fileChooser.showOpenDialog(ventana);
         if (ticketGener != null) {
             direccion = ticketGener.getAbsolutePath();
         }
@@ -137,16 +141,38 @@ public class Pizza {
         try (Stream<String> datos = Files.lines(archivo);) {
             Iterator<String> it = datos.iterator();
             while (it.hasNext()) {
-                StringTokenizer s = new StringTokenizer(it.next(), ":");
-                while (s.hasMoreTokens() == true) { //si hay mas trozos
+                String mensaje = it.next();
+                StringTokenizer s = new StringTokenizer(mensaje, ":");
+                String tipoMap = s.nextToken();
+                if (tipoMap.equalsIgnoreCase("Masa")) {
                     String nombre = s.nextToken();
                     Double precio = Double.parseDouble(s.nextToken());
-                    listarPrecios.put(nombre, precio);
-//                    precioPizza.setPrecioMasa(nombre,precio); HACERLO CUANDO TENGA TODOS LOS PRECIOS METIDOS
-// Meterle el hashmap, uno a uno, con las diferentes cargas, diferenciandolo con los 3 guiones
-                    System.out.println(s.nextToken()); //siguiente trozo
+                    mapMasa.put(nombre, precio);
+                    System.out.println(nombre + precio);
                 }
+                if (tipoMap.equalsIgnoreCase("Tipo")) {
+                    String nombre = s.nextToken();
+                    Double precio = Double.parseDouble(s.nextToken());
+                    mapTipo.put(nombre, precio);
+                    System.out.println(nombre + precio);
+                }
+                if (tipoMap.endsWith("Ingrediente")) {
+                    String nombre = s.nextToken();
+                    Double precio = Double.parseDouble(s.nextToken());
+                    mapIngrediente.put(nombre, precio);
+                    System.out.println(nombre + precio);
+                }
+                // while (s.hasMoreTokens() == true) { //si hay mas trozos
+//                    listarPrecios.put(nombre, precio);
+//                    precioPizza.setPrecioMasa(nombre,precio); HACERLO CUANDO TENGA TODOS LOS PRECIOS METIDOS
+// Meterle el hashmap, uno a uno, con las diferentes cargas, diferenciandolo con los nombres de cada Map
+                //System.out.println(s.nextToken()); //siguiente trozo
+                // }
             }
+            precioPizza.setPrecioMasa(mapMasa);
+            precioPizza.setPrecioTiposPizzas(mapTipo);
+            precioPizza.setPrecioIngrediente(mapIngrediente);
+            // al acabar de rellenar cada map, hago los sets
         } catch (IOException ex) {
             System.out.println("Error en la lectura del archivo");
         }
@@ -156,41 +182,41 @@ public class Pizza {
     public String getTipo() {
         return tipo;
     }
-
+    
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
+    
     public List getConjIngredientes() {
         return conjIngredientes;
     }
-
+    
     public void setConjIngredientes(List conjIngredientes) {
         this.conjIngredientes = conjIngredientes;
     }
-
+    
     public String getMasa() {
         return masa;
     }
-
+    
     public void setMasa(String masa) {
         this.masa = masa;
     }
-
+    
     public String getTamanyo() {
         return tamanyo;
     }
-
+    
     public void setTamanyo(String tamanyo) {
         this.tamanyo = tamanyo;
     }
-
+    
     public Precio getPrecioPizza() {
         return precioPizza;
     }
-
+    
     public void setPrecioPizza(Precio precioPizza) {
         this.precioPizza = precioPizza;
     }
-
+    
 }
