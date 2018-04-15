@@ -1,0 +1,7 @@
+Precio Final: 20.125
+Masa: 9.0 Normal
+Tipo: 7.0 Mexicana
+Ingredientes: 1.5 [Tomate]
+Tamaño: Mediana
+
+20.125

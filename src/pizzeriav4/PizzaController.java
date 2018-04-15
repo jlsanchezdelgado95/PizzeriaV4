@@ -5,6 +5,9 @@
  */
 package pizzeriav4;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +17,24 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import modelo.Pizza;
 
 /**
@@ -55,14 +66,38 @@ public class PizzaController implements Initializable {
     @FXML
     private CheckBox cBox4;
     @FXML
-    private CheckBox cBox5;
-    @FXML
     private Button bTicket;
     @FXML
     private Button bCargarPrecios;
+    private ImageView iv1;
+    private Image imagen;
+    @FXML
+    private Label lImagen;
+    @FXML
+    private Button bLimpiar;
+
+    public PizzaController() {
+        this.iv1 = new ImageView();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File sonido = new File("src/Sonidos/pizza.mp3");
+        final AudioClip cancion = new AudioClip(sonido.toURI().toString());
+        cancion.play();
+        inicializar();
+    }
+
+    private void inicializar() {
+        this.iv1 = new ImageView();
+        FileChooser fileChooser = new FileChooser();
+        Window ventana = null;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informacion sobre precios");
+        alert.setContentText("Seleccione una carta de precios, en caso contrario se cargaran unos precios predeterminados.");
+        alert.showAndWait();
+        File ticketGener = fileChooser.showOpenDialog(ventana);
+        pizza.cargarPrecios(ticketGener);
         cargaDatos();
     }
 
@@ -95,19 +130,49 @@ public class PizzaController implements Initializable {
     }
 
     @FXML
-    private void tipoPizza(ActionEvent event) {
+    private void tipoPizza(ActionEvent event) throws MalformedURLException, IOException {
         String tipo = cbTipoPizza.getValue();
-        if (tipo.equalsIgnoreCase("Basica")) {
-            pizza.setTipo("Basica");
-        }
-        if (tipo.equalsIgnoreCase("Mexicana")) {
-            pizza.setTipo("Mexicana");
-        }
-        if (tipo.equalsIgnoreCase("Cuatro Quesos")) {
-            pizza.setTipo("Cuatro Quesos");
-        }
-        if (tipo.equalsIgnoreCase("Barbacoa")) {
-            pizza.setTipo("Barbacoa");
+        if (tipo != null) {
+            if (tipo.equalsIgnoreCase("Basica")) {
+                File imagenArchivo = new File("src/Imagenes/pizzaBasica.jpg");
+                imagen = new Image(imagenArchivo.toURI().toString());//me aseguro que la direccion sea correcta
+                iv1 = new ImageView(imagen);
+                lImagen.setGraphic(iv1);
+                iv1.setFitHeight(300);
+                iv1.setFitWidth(150);
+                iv1.setPreserveRatio(true);
+                pizza.setTipo("Basica");
+            }
+            if (tipo.equalsIgnoreCase("Mexicana")) {
+                File imagenArchivo = new File("src/Imagenes/pizzaMexicana.jpg");
+                imagen = new Image(imagenArchivo.toURI().toString());//me aseguro que la direccion sea correcta
+                iv1 = new ImageView(imagen);
+                lImagen.setGraphic(iv1);
+                iv1.setFitHeight(300);
+                iv1.setFitWidth(150);
+                iv1.setPreserveRatio(true);
+                pizza.setTipo("Mexicana");
+            }
+            if (tipo.equalsIgnoreCase("Cuatro Quesos")) {
+                File imagenArchivo = new File("src/Imagenes/pizzaCuatroQuesos.jpg");
+                imagen = new Image(imagenArchivo.toURI().toString());//me aseguro que la direccion sea correcta
+                iv1 = new ImageView(imagen);
+                lImagen.setGraphic(iv1);
+                iv1.setFitHeight(300);
+                iv1.setFitWidth(150);
+                iv1.setPreserveRatio(true);
+                pizza.setTipo("Cuatro Quesos");
+            }
+            if (tipo.equalsIgnoreCase("Barbacoa")) {
+                File imagenArchivo = new File("src/Imagenes/pizzaBarbacoa.jpg");
+                imagen = new Image(imagenArchivo.toURI().toString());//me aseguro que la direccion sea correcta
+                iv1 = new ImageView(imagen);
+                lImagen.setGraphic(iv1);
+                iv1.setFitHeight(300);
+                iv1.setFitWidth(150);
+                iv1.setPreserveRatio(true);
+                pizza.setTipo("Barbacoa");
+            }
         }
         taComposicion.setText(pizza.composicion());
     }
@@ -132,7 +197,7 @@ public class PizzaController implements Initializable {
         List<String> ingredientesSeleccionados = new ArrayList<>();
         if (cBox1.isSelected()) {
             ingredientesSeleccionados.add(listaIngredientesController.get(0));//Jamon
-        } 
+        }
         if (cBox2.isSelected()) {
             ingredientesSeleccionados.add(listaIngredientesController.get(1));//Queso
         }
@@ -142,27 +207,30 @@ public class PizzaController implements Initializable {
         if (cBox4.isSelected()) {
             ingredientesSeleccionados.add(listaIngredientesController.get(3));//Cebolla
         }
-        if (cBox5.isSelected()) {
-            ingredientesSeleccionados.add(listaIngredientesController.get(4));//Oliva
-        }
         pizza.setConjIngredientes(ingredientesSeleccionados);
         taComposicion.setText(pizza.composicion());
     }
 
     @FXML
-    private void generarTicket(ActionEvent event) {
-        if (pizza.generarTicket()) {
-            System.out.println("Se ha generado correctamente");
-        } else {
-            System.out.println("No se ha podido generar");
-        }
-        
-        
+    private void generarTicket(ActionEvent event) throws IOException {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        Window ventana = null;
+        File ticketGener = directoryChooser.showDialog(ventana);
+        pizza.generarTicket(ticketGener);
     }
 
     @FXML
     private void cargarPrecios(ActionEvent event) {
-        pizza.cargarPrecios();
+        FileChooser fileChooser = new FileChooser();
+        Window ventana = null;
+        File ticketGener = fileChooser.showOpenDialog(ventana);
+        pizza.cargarPrecios(ticketGener);
+        cargaDatos();
+    }
+
+    @FXML
+    private void Limpiar(ActionEvent event) {
+        taComposicion.setText("");
     }
 
 }

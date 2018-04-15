@@ -1,6 +1,5 @@
 Masa:Normal:9.0
 Masa:Integral:6
-Tipo:Hawaiana:7.0
 Tipo:Mexicana:6.6
 Tipo:Barbacoa:8.0
 Tipo:Basica:3.0

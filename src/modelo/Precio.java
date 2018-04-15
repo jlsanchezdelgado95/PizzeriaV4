@@ -29,7 +29,7 @@ public class Precio {
         precioMasa.put("Integral", 9.50);
     }
 
-    private void cargaIngredientes() {
+    private  void cargaIngredientes() {
         precioIngrediente.put("Queso", 0.5);
         precioIngrediente.put("Jamon", 0.75);
         precioIngrediente.put("Tomate", 1.5);
@@ -37,7 +37,7 @@ public class Precio {
         precioIngrediente.put("Oliva", 1.0);
     }
 
-    private void cargaTipoPizzas() {
+    private  void cargaTipoPizzas() {
         precioTiposPizzas.put("Basica", 3.00);
         precioTiposPizzas.put("Mexicana", 7.00);
         precioTiposPizzas.put("Barbacoa", 8.50);

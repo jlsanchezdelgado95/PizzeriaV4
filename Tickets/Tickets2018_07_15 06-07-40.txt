@@ -1,0 +1,7 @@
+Precio Final: 25.35
+Masa: 9.0 Normal
+Tipo: 8.5 Barbacoa
+Ingredientes: 2.0 [Queso, Tomate]
+Tamaño: Familiar
+
+25.35

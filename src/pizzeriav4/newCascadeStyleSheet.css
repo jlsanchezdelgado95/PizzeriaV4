@@ -7,34 +7,74 @@ and open the template in the editor.
     Created on : 25-mar-2018, 23:17:47
     Author     : Kokekui
 */
+
+
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .AnchorPane{
-    -fx-background-color: #d14917;
+    -fx-background-color: #ff3333;
 }
-.label{
-    -fx-text-fill: #f88C00;
+.button {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #ff3333;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
-.RadioButton{
-    -fx-text-fill: #f88C00;
+
+.button:hover {
+    -fx-background-color: #990000;
 }
-.Button{
-    -fx-background-color: #f9fe7e;
-    -fx-text-fill: #d9ae4e
+
+.Radiobutton{
+     -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
 }
-.ListView{
-    -fx-background-color: #f9fe7e;
+
+.CheckBox{
+     -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
 }
-@keyframes spinner {
-  to {transform: rotate(360deg);}
-}
- 
+
 .spinner:before {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  border-top-color: #333;
-  animation: spinner .6s linear infinite;
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    animation: spinner .6s linear infinite;
 }
