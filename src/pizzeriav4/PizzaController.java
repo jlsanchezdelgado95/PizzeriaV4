@@ -94,6 +94,7 @@ public class PizzaController implements Initializable {
         Window ventana = null;
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion sobre precios");
+        alert.setHeaderText("Bienvenido a Telepizza");
         alert.setContentText("Seleccione una carta de precios, en caso contrario se cargaran unos precios predeterminados.");
         alert.showAndWait();
         File ticketGener = fileChooser.showOpenDialog(ventana);

@@ -47,7 +47,7 @@
          </font>
       </Label>
       <ComboBox fx:id="cbTipoPizza" layoutX="116.0" layoutY="207.0" onAction="#tipoPizza" prefWidth="150.0" />
-      <TextArea fx:id="taComposicion" editable="false" layoutX="171.0" layoutY="321.0" prefHeight="248.0" prefWidth="600.0" />
+      <TextArea fx:id="taComposicion" editable="false" layoutX="171.0" layoutY="321.0" prefHeight="248.0" prefWidth="600.0" styleClass="TextArea" stylesheets="@newCascadeStyleSheet.css" />
       <CheckBox fx:id="cBox1" layoutX="300.0" layoutY="203.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" styleClass="CheckBox" stylesheets="@newCascadeStyleSheet.css" text="Queso" />
       <CheckBox fx:id="cBox2" layoutX="300.0" layoutY="230.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" styleClass="CheckBox" stylesheets="@newCascadeStyleSheet.css" text="Jamon" />
       <CheckBox fx:id="cBox3" layoutX="300.0" layoutY="260.0" mnemonicParsing="false" onAction="#listIngredientes" prefHeight="17.0" prefWidth="79.0" styleClass="CheckBox" stylesheets="@newCascadeStyleSheet.css" text="Tomate" />

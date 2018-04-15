@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -91,8 +92,9 @@ public class Pizza {
     }
 
     public String composicion() {
+         DecimalFormat df = new DecimalFormat("#.00");
         String mensaje = "";
-        mensaje += "Precio Final: " + calcularPrecio() + "\n";
+        mensaje += "Precio Final: " + df.format(calcularPrecio()) + "\n";
         if (masa != null) {
             mensaje += "Masa: " + precioPizza.getPrecioMasa().get(masa) + " " + masa + "\n";
         }
@@ -130,8 +132,8 @@ public class Pizza {
         String fechaFormat = LocalDateTime.now().format(formateado);
         Path ticketSel = Paths.get(direccion + "\\Tickets" + fechaFormat + ".txt");
         try (BufferedWriter out = Files.newBufferedWriter(ticketSel, StandardOpenOption.CREATE)) {
-            StringTokenizer s = new StringTokenizer( composicion(), "\n");
-            while(s.hasMoreTokens()){
+            StringTokenizer s = new StringTokenizer(composicion(), "\n");
+            while (s.hasMoreTokens()) {
                 out.write(s.nextToken());
                 out.newLine();
             }
